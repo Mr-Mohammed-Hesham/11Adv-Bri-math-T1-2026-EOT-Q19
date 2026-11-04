@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎲 Binomial Probability Distributions - رياضيات 11 متقدم | Mr. Mohammed Hesham</title>
+<meta name="description" content="امتحان تفاعلي عن إيجاد الاحتمالات باستخدام التوزيعات ذات الحدين - رياضيات 11 متقدم">
+<meta name="author" content="Mr. Mohammed Hesham">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Inter:wght@400;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<style>
+body { font-family: 'Cairo', sans-serif; background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); }
+body.en-mode { font-family: 'Inter', sans-serif; direction: ltr; }
+.arabic-math { font-family: 'Amiri', 'Cairo', serif; }
+.correct { background-color: #dcfce7 !important; border-color: #16a34a !important; }
+.incorrect { background-color: #fee2e2 !important; border-color: #dc2626 !important; }
+.timer-warning { color: #dc2626 !important; animation: pulse 1s infinite; }
+@keyframes pulse { 50% { opacity: 0.7; } }
+@media print { .no-print { display: none !important; } }
+.success-badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-weight: bold; font-size: 0.875rem; }
+.grade-excellent { background: #dcfce7; color: #166534; }
+.grade-good { background: #fef3c7; color: #92400e; }
+.grade-pass { background: #dbeafe; color: #1e40af; }
+.grade-fail { background: #fee2e2; color: #991b1b; }
+.lang-switch { position: fixed; top: 16px; left: 16px; z-index: 100; background: white; padding: 6px; border-radius: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); display: flex; gap: 4px; border: 2px solid #d97706; }
+body.en-mode .lang-switch { left: auto; right: 16px; }
+.lang-btn { padding: 6px 14px; border-radius: 20px; cursor: pointer; font-weight: bold; transition: all 0.3s; border: none; font-size: 0.875rem; background: transparent; color: #6b7280; }
+.lang-btn.active { background: #d97706; color: white; box-shadow: 0 2px 6px rgba(217,119,6,0.4); }
+.shuffle-badge { display: inline-block; background: linear-gradient(135deg, #d97706, #b45309); color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; margin-right: 8px; }
+body.en-mode .shuffle-badge { margin-right: 0; margin-left: 8px; }
+.math-display { display: inline-block; direction: ltr; font-family: 'Amiri', serif; font-size: 1.1em; padding: 2px 6px; background: #fef3c7; border-radius: 4px; margin: 2px; color: #92400e; font-weight: 600; }
+.save-indicator { position: fixed; bottom: 20px; left: 20px; z-index: 200; background: #10b981; color: white; padding: 8px 16px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
+body.en-mode .save-indicator { left: auto; right: 20px; }
+.save-indicator.show { opacity: 1; }
+.formula-box { background: #fef3c7; border: 2px solid #f59e0b; border-radius: 8px; padding: 12px; margin: 10px 0; font-family: 'Amiri', serif; direction: ltr; text-align: center; }
+.svg-graph { display: block; margin: 12px auto; background: white; border: 2px solid #e5e7eb; border-radius: 12px; padding: 8px; max-width: 100%; }
+.graph-container { text-align: center; margin: 10px 0; }
+.module-badge { display: inline-block; padding: 4px 16px; border-radius: 20px; font-weight: bold; font-size: 0.85rem; margin-bottom: 8px; }
+.module-1 { background: #fef3c7; color: #92400e; }
+.module-2 { background: #dbeafe; color: #1e40af; }
+.module-3 { background: #fce7f3; color: #9f1239; }
+.module-4 { background: #ecfdf5; color: #065f46; }
+.module-5 { background: #ede9fe; color: #5b21b6; }
+.module-6 { background: #fee2e2; color: #991b1b; }
+.question-card { background: white; border: 2px solid #e5e7eb; border-radius: 12px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); transition: all 0.3s; }
+.question-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.12); }
+.solution-box { display: none; background: #f0fdf4; border: 2px solid #16a34a; border-radius: 8px; padding: 15px; margin-top: 15px; animation: slideDown 0.3s ease-out; }
+.solution-box.show { display: block; }
+@keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+.check-btn { background: #16a34a; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: bold; margin-right: 5px; transition: all 0.3s; }
+.check-btn:hover { background: #15803d; transform: translateY(-1px); }
+.show-answer-btn { background: #d97706; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: all 0.3s; }
+.show-answer-btn:hover { background: #b45309; transform: translateY(-1px); }
+</style>
+</head>
+<body class="p-4 md:p-8 min-h-screen">
+
+<div class="lang-switch no-print">
+<button class="lang-btn active" onclick="setLanguage('ar')" id="btn-ar">عربي</button>
+<button class="lang-btn" onclick="setLanguage('en')" id="btn-en">EN</button>
+</div>
+
+<div id="saveIndicator" class="save-indicator">💾 <span data-ar="تم الحفظ" data-en="Saved">تم الحفظ</span></div>
+
+<div id="timer-container" class="max-w-5xl mx-auto mb-4 text-center no-print">
+<div class="bg-white p-4 rounded-2xl shadow-lg inline-block border-2 border-amber-100">
+<span class="text-gray-600 ml-2">⏰ <span data-ar="الوقت المتبقي:" data-en="Time Left:">الوقت المتبقي:</span></span>
+<span id="timer" class="text-2xl font-bold text-amber-700 font-mono">75:00</span>
+<span class="shuffle-badge">🎲 <span data-ar="التوزيعات ذات الحدين" data-en="Binomial Distributions">التوزيعات ذات الحدين</span> - 30 <span data-ar="سؤال" data-en="Questions">سؤال</span></span>
+</div>
+</div>
+
+<div class="max-w-5xl mx-auto mb-6 flex flex-wrap gap-3 justify-center no-print">
+<button onclick="toggleAnswers()" class="bg-amber-700 hover:bg-amber-800 text-white px-5 py-2 rounded-xl font-medium transition shadow">👀 <span data-ar="إظهار/إخفاء كل الإجابات" data-en="Show/Hide All Answers">إظهار/إخفاء كل الإجابات</span></button>
+<button onclick="window.print()" class="bg-gray-700 hover:bg-gray-900 text-white px-5 py-2 rounded-xl font-medium transition shadow">🖨️ <span data-ar="طباعة" data-en="Print">طباعة</span></button>
+<button onclick="reshuffleExam()" class="bg-gradient-to-r from-amber-700 to-orange-600 hover:from-amber-800 hover:to-orange-700 text-white px-5 py-2 rounded-xl font-medium transition shadow">🔄 <span data-ar="أسئلة جديدة" data-en="New Questions">أسئلة جديدة</span></button>
+<button onclick="clearProgress()" class="bg-red-500 hover:bg-red-600 text-white px-5 py-2 rounded-xl font-medium transition shadow">🗑️ <span data-ar="مسح التقدم" data-en="Clear Progress">مسح التقدم</span></button>
+</div>
+
+<header class="max-w-5xl mx-auto bg-white p-8 rounded-3xl shadow-2xl mb-8 border-4 border-amber-500">
+<div class="text-center">
+<div class="inline-block bg-amber-700 text-white px-6 py-2 rounded-full text-sm font-bold mb-4">MATH 11 ADVANCED - QUESTION 19</div>
+<h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">🎲 <span data-ar="إيجاد الاحتمالات باستخدام التوزيعات ذات الحدين" data-en="Finding Probabilities Using Binomial Distributions">إيجاد الاحتمالات باستخدام التوزيعات ذات الحدين</span></h1>
+<h2 class="text-xl text-amber-700 font-semibold mb-2"><span data-ar="رياضيات 11 متقدم - مثال 3 وتمارين (صفحة 662)" data-en="Grade 11 Advanced - Example 3 & Exercises (Page 662)">رياضيات 11 متقدم - مثال 3 وتمارين (صفحة 662)</span></h2>
+<p class="text-gray-600 mb-4"><span data-ar="Binomial Probability Formula: P(X=k) = C(n,k)·pᵏ·(1-p)ⁿ⁻ᵏ" data-en="Binomial Probability Formula: P(X=k) = C(n,k)·pᵏ·(1-p)ⁿ⁻ᵏ">Binomial Probability Formula: P(X=k) = C(n,k)·pᵏ·(1-p)ⁿ⁻ᵏ</span></p>
+<p class="text-sm text-green-600 font-semibold">💾 <span data-ar="يتم حفظ تقدمك تلقائياً - 30 سؤالاً في 6 أقسام" data-en="Your progress is auto-saved - 30 questions in 6 sections">يتم حفظ تقدمك تلقائياً - 30 سؤالاً في 6 أقسام</span></p>
+</div>
+<div class="mt-6 flex flex-wrap justify-center gap-4 text-sm text-gray-600">
+<span>📅 <span data-ar="التاريخ:" data-en="Date:">التاريخ:</span> <input type="text" id="examDate" class="border-b-2 border-amber-300 bg-transparent w-32 text-center"></span>
+<span>😊 <span data-ar="الاسم:" data-en="Name:">الاسم:</span> <input type="text" id="studentName" class="border-b-2 border-amber-300 bg-transparent w-40 text-center" data-placeholder-ar="اكتب اسمك" data-placeholder-en="Your name" placeholder="اكتب اسمك"></span>
+<span>🏫 <span data-ar="الشعبة:" data-en="Class:">الشعبة:</span> <input type="text" id="studentClass" class="border-b-2 border-amber-300 bg-transparent w-32 text-center" data-placeholder-ar="الشعبة" data-placeholder-en="Class" placeholder="الشعبة"></span>
+<span>⏰ <span data-ar="المدة: 75 دقيقة" data-en="Duration: 75 min">المدة: 75 دقيقة</span></span>
+<span>📊 <span data-ar="المجموع: 100 درجة" data-en="Total: 100 points">المجموع: 100 درجة</span></span>
+</div>
+</header>
+
+<div class="max-w-5xl mx-auto mb-6 bg-white p-4 rounded-xl shadow-lg border-2 border-amber-200 no-print">
+<h3 class="font-bold text-lg mb-3 text-amber-800 text-center">📐 <span data-ar="صيغة التوزيع ذي الحدين" data-en="Binomial Distribution Formula">صيغة التوزيع ذي الحدين</span></h3>
+<div class="grid md:grid-cols-3 gap-3 text-sm">
+<div class="formula-box">
+<strong><span data-ar="الصيغة الأساسية:" data-en="Main Formula:">الصيغة الأساسية:</span></strong><br>
+<span class="math-display">P(X=k) = C(n,k) · pᵏ · (1-p)ⁿ⁻ᵏ</span>
+</div>
+<div class="formula-box">
+<strong><span data-ar="معامل التوافيق:" data-en="Combination:">معامل التوافيق:</span></strong><br>
+<span class="math-display">C(n,k) = n! / [k!·(n-k)!]</span>
+</div>
+<div class="formula-box">
+<strong><span data-ar="شروط التوزيع ذي الحدين:" data-en="Binomial Conditions:">شروط التوزيع ذي الحدين:</span></strong><br>
+<span data-ar="1) n تجربة مستقلة" data-en="1) n independent trials">1) n تجربة مستقلة</span><br>
+<span data-ar="2) نتيجتان فقط (نجاح/فشل)" data-en="2) Two outcomes only">2) نتيجتان فقط</span><br>
+<span data-ar="3) احتمال النجاح p ثابت" data-en="3) Constant probability p">3) احتمال النجاح p ثابت</span>
+</div>
+<div class="formula-box">
+<strong><span data-ar="المتوسط:" data-en="Mean:">المتوسط:</span></strong><br>
+<span class="math-display">μ = n·p</span>
+</div>
+<div class="formula-box">
+<strong><span data-ar="الانحراف المعياري:" data-en="Standard Deviation:">الانحراف المعياري:</span></strong><br>
+<span class="math-display">σ = √[n·p·(1-p)]</span>
+</div>
+<div class="formula-box">
+<strong><span data-ar="التباين:" data-en="Variance:">التباين:</span></strong><br>
+<span class="math-display">σ² = n·p·(1-p)</span>
+</div>
+</div>
+</div>
+
+<main class="max-w-5xl mx-auto space-y-8" id="exam-content"></main>
+
+<div class="text-center no-print pb-8 mt-8">
+<button onclick="gradeExam()" class="bg-gradient-to-r from-amber-700 to-orange-600 hover:from-amber-800 hover:to-orange-700 text-white text-lg px-12 py-4 rounded-2xl font-bold shadow-xl transition transform hover:scale-105">🎯 <span data-ar="صحح إجاباتي!" data-en="Grade My Exam!">صحح إجاباتي!</span></button>
+</div>
+
+<div id="results-panel" class="max-w-5xl mx-auto mt-8 bg-white p-8 rounded-3xl shadow-2xl border-4 border-amber-500 hidden no-print">
+<h2 class="text-3xl font-bold text-gray-900 mb-6 text-center">🏆 <span data-ar="نتيجتك يا بطل!" data-en="Your Result, Champion!">نتيجتك يا بطل!</span> 🏆</h2>
+<div class="grid md:grid-cols-3 gap-4 mb-6">
+<div class="bg-amber-50 p-4 rounded-xl text-center"><p>😊 <span data-ar="الاسم" data-en="Name">الاسم</span></p><p id="res-name" class="font-bold text-xl text-amber-700">-</p></div>
+<div class="bg-orange-50 p-4 rounded-xl text-center"><p>📅 <span data-ar="التاريخ" data-en="Date">التاريخ</span></p><p id="res-date" class="font-bold text-xl text-orange-700">-</p></div>
+<div class="bg-amber-50 p-4 rounded-xl text-center"><p>🌟 <span data-ar="المجموع" data-en="Total">المجموع</span></p><p id="res-total" class="font-bold text-3xl text-amber-700">0 / 100</p></div>
+</div>
+<div class="text-center mb-6">
+<span id="success-badge" class="success-badge grade-excellent">-</span>
+<p id="success-percent" class="text-4xl font-bold text-amber-700 mt-2">0%</p>
+<p class="text-sm text-gray-500"><span data-ar="نسبة النجاح" data-en="Success Rate">نسبة النجاح</span></p>
+</div>
+<div class="bg-gray-50 p-6 rounded-xl mb-6">
+<h3 class="font-bold text-lg mb-4 text-gray-800">📊 <span data-ar="أداؤك في كل قسم:" data-en="Your Performance by Section:">أداؤك في كل قسم:</span></h3>
+<div class="space-y-3" id="sections-performance"></div>
+</div>
+<div class="text-center">
+<button id="sendEmailBtn" onclick="sendResultsToEmail()" class="bg-gradient-to-r from-amber-700 to-orange-600 text-white text-lg px-8 py-3 rounded-2xl font-bold shadow-xl transition">📧 <span data-ar="أرسل النتيجة للمعلم" data-en="Send Result to Teacher">أرسل النتيجة للمعلم</span></button>
+<p id="emailStatus" class="text-sm mt-2 text-center font-medium"></p>
+</div>
+</div>
+
+<footer class="max-w-5xl mx-auto mt-10 mb-8 text-center text-gray-500 text-sm no-print">
+© Binomial Distributions - Grade 11 Advanced | Mr. Mohammed Hesham 🎲
+</footer>
+
+<script>
+const PUBLIC_KEY = "Rb3Lq8tXaFmc5YHUH";
+const SERVICE_ID = "service_w15m64i";
+const TEMPLATE_ID = "template_5b0u2tq";
+const TARGET_EMAIL = "mohammedhesham872@gmail.com";
+emailjs.init(PUBLIC_KEY);
+
+const STORAGE_KEY = 'binomial_distributions_grade11_v1';
+const TOTAL_TIME = 4500;
+const TOTAL_QUESTIONS = 30;
+const TOTAL_SECTIONS = 6;
+const QUESTIONS_PER_SECTION = 5;
+
+let currentSeed = null;
+let answersVisible = false;
+let saveIndicatorTimeout = null;
+let currentLang = 'ar';
+let timeRemaining = TOTAL_TIME;
+let timerInterval;
+let examData;
+let correctAnswersMap = {};
+let rng = null;
+
+function mulberry32(a) {
+    return function() {
+        var t = a += 0x6D2B79F5;
+        t = Math.imul(t ^ t >>> 15, t | 1);
+        t ^= t + Math.imul(t ^ t >>> 7, t | 61);
+        return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    }
+}
+
+function showSaveIndicator() {
+    const indicator = document.getElementById('saveIndicator');
+    indicator.classList.add('show');
+    if (saveIndicatorTimeout) clearTimeout(saveIndicatorTimeout);
+    saveIndicatorTimeout = setTimeout(() => indicator.classList.remove('show'), 1500);
+}
+
+function saveState(showIndicator = true) {
+    try {
+        const state = {
+            seed: currentSeed, lang: currentLang,
+            studentName: document.getElementById('studentName').value,
+            studentClass: document.getElementById('studentClass').value,
+            examDate: document.getElementById('examDate').value,
+            answers: getSelectedAnswers(),
+            timeRemaining: timeRemaining,
+            answersVisible: answersVisible, savedAt: Date.now()
+        };
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        if (showIndicator) showSaveIndicator();
+    } catch (e) { console.error('Save error:', e); }
+}
+
+function loadState() {
+    try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        return saved ? JSON.parse(saved) : null;
+    } catch (e) { return null; }
+}
+
+function getSelectedAnswers() {
+    const answers = {};
+    for (let i = 0; i < TOTAL_QUESTIONS; i++) {
+        const selected = document.querySelector('input[name="q'+i+'"]:checked');
+        if (selected) answers[i] = selected.value;
+    }
+    return answers;
+}
+
+function restoreAnswers(answers) {
+    if (!answers) return;
+    for (const [idx, val] of Object.entries(answers)) {
+        const radio = document.querySelector('input[name="q'+idx+'"][value="'+val+'"]');
+        if (radio) radio.checked = true;
+    }
+}
+
+function clearProgress() {
+    const msg = currentLang === 'ar' ? '⚠️ هل أنت متأكد من مسح كل التقدم؟' : '⚠️ Clear all progress?';
+    if (confirm(msg)) { localStorage.removeItem(STORAGE_KEY); location.reload(); }
+}
+
+function setupAnswerListeners() {
+    document.getElementById('exam-content').addEventListener('change', (e) => {
+        if (e.target.type === 'radio') saveState();
+    });
+}
+
+function setupInputListeners() {
+    ['studentName', 'studentClass', 'examDate'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+            el.addEventListener('input', () => saveState(false));
+            el.addEventListener('blur', () => saveState());
+        }
+    });
+}
+
+// ==================== SVG DIAGRAMS ====================
+const svgGraphs = {
+    binomial_formula: `<svg class="svg-graph" width="500" height="320" viewBox="0 0 500 320" xmlns="http://www.w3.org/2000/svg">
+        <rect x="5" y="5" width="490" height="310" rx="12" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+        <text x="250" y="25" text-anchor="middle" font-size="14" fill="#92400e" font-weight="bold">📐 صيغة التوزيع ذي الحدين - Binomial Formula</text>
+        <rect x="20" y="45" width="460" height="70" rx="6" fill="#fde68a" stroke="#f59e0b" stroke-width="2"/>
+        <text x="250" y="70" text-anchor="middle" font-size="14" fill="#92400e" font-family="'Amiri', serif" font-weight="bold">P(X = k) = C(n,k) · pᵏ · (1-p)ⁿ⁻ᵏ</text>
+        <text x="250" y="95" text-anchor="middle" font-size="11" fill="#92400e">Where: n = number of trials, k = successes, p = probability of success</text>
+        <rect x="20" y="125" width="220" height="80" rx="6" fill="#fde68a" stroke="#f59e0b" stroke-width="2"/>
+        <text x="130" y="145" text-anchor="middle" font-size="11" fill="#92400e" font-weight="bold">C(n,k) = n! / [k!(n-k)!]</text>
+        <text x="130" y="165" text-anchor="middle" font-size="10" fill="#92400e">Example: C(10,6)</text>
+        <text x="130" y="182" text-anchor="middle" font-size="10" fill="#92400e">= 10!/(6!·4!) = 210</text>
+        <rect x="260" y="125" width="220" height="80" rx="6" fill="#fde68a" stroke="#f59e0b" stroke-width="2"/>
+        <text x="370" y="145" text-anchor="middle" font-size="11" fill="#92400e" font-weight="bold">Conditions:</text>
+        <text x="370" y="163" text-anchor="middle" font-size="10" fill="#92400e">✓ Fixed number of trials (n)</text>
+        <text x="370" y="178" text-anchor="middle" font-size="10" fill="#92400e">✓ Two outcomes only</text>
+        <text x="370" y="193" text-anchor="middle" font-size="10" fill="#92400e">✓ Independent trials</text>
+        <text x="370" y="208" text-anchor="middle" font-size="10" fill="#92400e">✓ Constant probability (p)</text>
+        <rect x="20" y="215" width="460" height="80" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+        <text x="250" y="235" text-anchor="middle" font-size="11" fill="#92400e" font-weight="bold">📊 Mean & Standard Deviation:</text>
+        <text x="150" y="255" text-anchor="middle" font-size="12" fill="#92400e" font-family="'Amiri', serif">μ = n·p</text>
+        <text x="350" y="255" text-anchor="middle" font-size="12" fill="#92400e" font-family="'Amiri', serif">σ = √[n·p·(1-p)]</text>
+        <text x="250" y="280" text-anchor="middle" font-size="10" fill="#92400e">Example 3: n=10, p=0.40, find P(X=6)</text>
+        <text x="250" y="295" text-anchor="middle" font-size="10" fill="#92400e">P(X=6) = C(10,6)·(0.4)⁶·(0.6)⁴ = 210·0.004096·0.1296 ≈ 0.1115 ≈ 11.1%</text>
+    </svg>`,
+    
+    example3_solution: `<svg class="svg-graph" width="500" height="400" viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg">
+        <rect x="5" y="5" width="490" height="390" rx="12" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+        <text x="250" y="25" text-anchor="middle" font-size="14" fill="#1e40af" font-weight="bold">📝 مثال 3: خميس يبيع - n=10, p=40%, k=6</text>
+        <!-- Problem statement -->
+        <rect x="20" y="40" width="460" height="60" rx="6" fill="#bfdbfe" stroke="#2563eb" stroke-width="2"/>
+        <text x="250" y="58" text-anchor="middle" font-size="11" fill="#1e40af">خميس لديه فرصة 40% لإتمام صفقة بيع</text>
+        <text x="250" y="75" text-anchor="middle" font-size="11" fill="#1e40af">يعرض على 10 أشخاص - أوجد احتمال أن يشتري 6 أشخاص</text>
+        <text x="250" y="92" text-anchor="middle" font-size="10" fill="#1e40af">n = 10, p = 0.40, k = 6, (1-p) = 0.60</text>
+        <!-- Step 1 -->
+        <rect x="20" y="110" width="460" height="50" rx="6" fill="#bfdbfe" stroke="#2563eb" stroke-width="2"/>
+        <text x="250" y="130" text-anchor="middle" font-size="11" fill="#1e40af" font-weight="bold">Step 1: C(10,6) = 10!/(6!·4!) = 210</text>
+        <text x="250" y="150" text-anchor="middle" font-size="10" fill="#1e40af">Number of ways to choose 6 successes from 10 trials</text>
+        <!-- Step 2 -->
+        <rect x="20" y="170" width="460" height="50" rx="6" fill="#bfdbfe" stroke="#2563eb" stroke-width="2"/>
+        <text x="250" y="190" text-anchor="middle" font-size="11" fill="#1e40af" font-weight="bold">Step 2: pᵏ = (0.40)⁶ ≈ 0.004096</text>
+        <text x="250" y="210" text-anchor="middle" font-size="10" fill="#1e40af">Probability of 6 successes</text>
+        <!-- Step 3 -->
+        <rect x="20" y="230" width="460" height="50" rx="6" fill="#bfdbfe" stroke="#2563eb" stroke-width="2"/>
+        <text x="250" y="250" text-anchor="middle" font-size="11" fill="#1e40af" font-weight="bold">Step 3: (1-p)ⁿ⁻ᵏ = (0.60)⁴ ≈ 0.1296</text>
+        <text x="250" y="270" text-anchor="middle" font-size="10" fill="#1e40af">Probability of 4 failures</text>
+        <!-- Final -->
+        <rect x="20" y="290" width="460" height="60" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+        <text x="250" y="310" text-anchor="middle" font-size="12" fill="#92400e" font-weight="bold">P(X=6) = 210 × 0.004096 × 0.1296</text>
+        <text x="250" y="330" text-anchor="middle" font-size="12" fill="#92400e" font-weight="bold">P(X=6) ≈ 0.1115 ≈ 11.1%</text>
+        <text x="250" y="345" text-anchor="middle" font-size="10" fill="#92400e">Answer: B (11.1%)</text>
+        <!-- Bar chart showing all probabilities -->
+        <rect x="20" y="355" width="460" height="30" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+        <text x="250" y="375" text-anchor="middle" font-size="10" fill="#92400e">μ = n·p = 10·0.4 = 4 (expected successes)</text>
+    </svg>`,
+    
+    exercise3_solution: `<svg class="svg-graph" width="500" height="400" viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg">
+        <rect x="5" y="5" width="490" height="390" rx="12" fill="#fce7f3" stroke="#ec4899" stroke-width="2"/>
+        <text x="250" y="25" text-anchor="middle" font-size="14" fill="#9f1239" font-weight="bold">📱 تمرين 3: التسويق عبر الهاتف - n=20, p=15%, k=5</text>
+        <!-- Problem -->
+        <rect x="20" y="40" width="460" height="60" rx="6" fill="#fbcfe8" stroke="#ec4899" stroke-width="2"/>
+        <text x="250" y="58" text-anchor="middle" font-size="11" fill="#9f1239">خولة تجري 20 مكالمة تسويقية في ساعة</text>
+        <text x="250" y="75" text-anchor="middle" font-size="11" fill="#9f1239">احتمال البيع في كل مكالمة = 15%</text>
+        <text x="250" y="92" text-anchor="middle" font-size="10" fill="#9f1239">n = 20, p = 0.15, k = 5, (1-p) = 0.85</text>
+        <!-- Step 1 -->
+        <rect x="20" y="110" width="460" height="50" rx="6" fill="#fbcfe8" stroke="#ec4899" stroke-width="2"/>
+        <text x="250" y="130" text-anchor="middle" font-size="11" fill="#9f1239" font-weight="bold">Step 1: C(20,5) = 20!/(5!·15!) = 15,504</text>
+        <text x="250" y="150" text-anchor="middle" font-size="10" fill="#9f1239">Number of ways to choose 5 successes from 20</text>
+        <!-- Step 2 -->
+        <rect x="20" y="170" width="460" height="50" rx="6" fill="#fbcfe8" stroke="#ec4899" stroke-width="2"/>
+        <text x="250" y="190" text-anchor="middle" font-size="11" fill="#9f1239" font-weight="bold">Step 2: pᵏ = (0.15)⁵ ≈ 0.0000759</text>
+        <text x="250" y="210" text-anchor="middle" font-size="10" fill="#9f1239">Probability of 5 sales</text>
+        <!-- Step 3 -->
+        <rect x="20" y="230" width="460" height="50" rx="6" fill="#fbcfe8" stroke="#ec4899" stroke-width="2"/>
+        <text x="250" y="250" text-anchor="middle" font-size="11" fill="#9f1239" font-weight="bold">Step 3: (1-p)ⁿ⁻ᵏ = (0.85)¹⁵ ≈ 0.0874</text>
+        <text x="250" y="270" text-anchor="middle" font-size="10" fill="#9f1239">Probability of 15 non-sales</text>
+        <!-- Final -->
+        <rect x="20" y="290" width="460" height="60" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+        <text x="250" y="310" text-anchor="middle" font-size="12" fill="#92400e" font-weight="bold">P(X=5) = 15,504 × 0.0000759 × 0.0874</text>
+        <text x="250" y="330" text-anchor="middle" font-size="12" fill="#92400e" font-weight="bold">P(X=5) ≈ 0.1029 ≈ 10.3%</text>
+        <text x="250" y="345" text-anchor="middle" font-size="10" fill="#92400e">Answer: H (10.3%)</text>
+        <!-- Statistics -->
+        <rect x="20" y="355" width="220" height="30" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+        <text x="130" y="375" text-anchor="middle" font-size="10" fill="#92400e">μ = 20·0.15 = 3</text>
+        <rect x="260" y="355" width="220" height="30" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+        <text x="370" y="375" text-anchor="middle" font-size="10" fill="#92400e">σ = √(20·0.15·0.85) ≈ 1.597</text>
+    </svg>`,
+    
+    binomial_bar_chart: `<svg class="svg-graph" width="500" height="340" viewBox="0 0 500 340" xmlns="http://www.w3.org/2000/svg">
+        <rect x="5" y="5" width="490" height="330" rx="12" fill="#ecfdf5" stroke="#10b981" stroke-width="2"/>
+        <text x="250" y="25" text-anchor="middle" font-size="14" fill="#065f46" font-weight="bold">📊 مخطط أعمدة التوزيع ذي الحدين (n=10, p=0.4)</text>
+        <!-- Axes -->
+        <line x1="60" y1="280" x2="460" y2="280" stroke="#374151" stroke-width="2" marker-end="url(#arrowB1)"/>
+        <line x1="60" y1="280" x2="60" y2="50" stroke="#374151" stroke-width="2" marker-end="url(#arrowB1)"/>
+        <text x="465" y="285" font-size="11" fill="#374151" font-weight="bold">k</text>
+        <text x="45" y="45" font-size="11" fill="#374151" font-weight="bold">P(X=k)</text>
+        <!-- Bars for k=0 to 10 -->
+        <!-- Heights proportional to probabilities × 1000 -->
+        <rect x="75" y="268" width="30" height="12" fill="#10b981" stroke="#065f46" stroke-width="1"/>
+        <text x="90" y="295" text-anchor="middle" font-size="8" fill="#374151">0</text>
+        <text x="90" y="263" text-anchor="middle" font-size="7" fill="#065f46">0.006</text>
+        <rect x="115" y="240" width="30" height="40" fill="#10b981" stroke="#065f46" stroke-width="1"/>
+        <text x="130" y="295" text-anchor="middle" font-size="8" fill="#374151">1</text>
+        <text x="130" y="235" text-anchor="middle" font-size="7" fill="#065f46">0.040</text>
+        <rect x="155" y="180" width="30" height="100" fill="#10b981" stroke="#065f46" stroke-width="1"/>
+        <text x="170" y="295" text-anchor="middle" font-size="8" fill="#374151">2</text>
+        <text x="170" y="175" text-anchor="middle" font-size="7" fill="#065f46">0.121</text>
+        <rect x="195" y="120" width="30" height="160" fill="#10b981" stroke="#065f46" stroke-width="1"/>
+        <text x="210" y="295" text-anchor="middle" font-size="8" fill="#374151">3</text>
+        <text x="210" y="115" text-anchor="middle" font-size="7" fill="#065f46">0.215</text>
+        <rect x="235" y="90" width="30" height="190" fill="#10b981" stroke="#065f46" stroke-width="1"/>
+        <text x="250" y="295" text-anchor="middle" font-size="8" fill="#374151">4</text>
+        <text x="250" y="85" text-anchor="middle" font-size="7" fill="#065f46">0.251</text>
+        <rect x="275" y="100" width="30" height="180" fill="#f59e0b" stroke="#92400e" stroke-width="2"/>
+        <text x="290" y="295" text-anchor="middle" font-size="8" fill="#374151" font-weight="bold">5</text>
+        <text x="290" y="95" text-anchor="middle" font-size="7" fill="#92400e" font-weight="bold">0.201</text>
+        <rect x="315" y="140" width="30" height="140" fill="#10b981" stroke="#065f46" stroke-width="1"/>
+        <text x="330" y="295" text-anchor="middle" font-size="8" fill="#374151">6</text>
+        <text x="330" y="135" text-anchor="middle" font-size="7" fill="#065f46">0.111</text>
+        <rect x="355" y="190" width="30" height="90" fill="#10b981" stroke="#065f46" stroke-width="1"/>
+        <text x="370" y="295" text-anchor="middle" font-size="8" fill="#374151">7</text>
+        <text x="370" y="185" text-anchor="middle" font-size="7" fill="#065f46">0.042</text>
+        <rect x="395" y="230" width="30" height="50" fill="#10b981" stroke="#065f46" stroke-width="1"/>
+        <text x="410" y="295" text-anchor="middle" font-size="8" fill="#374151">8</text>
+        <text x="410" y="225" text-anchor="middle" font-size="7" fill="#065f46">0.011</text>
+        <rect x="435" y="260" width="30" height="20" fill="#10b981" stroke="#065f46" stroke-width="1"/>
+        <text x="450" y="295" text-anchor="middle" font-size="8" fill="#374151">9</text>
+        <text x="450" y="255" text-anchor="middle" font-size="7" fill="#065f46">0.002</text>
+        <!-- Mean line -->
+        <line x1="250" y1="50" x2="250" y2="280" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="4"/>
+        <text x="250" y="45" text-anchor="middle" font-size="9" fill="#dc2626" font-weight="bold">μ=4</text>
+        <text x="250" y="315" text-anchor="middle" font-size="10" fill="#065f46">Distribution is slightly right-skewed (p=0.4 &lt; 0.5)</text>
+        <defs><marker id="arrowB1" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#374151"/></marker></defs>
+    </svg>`,
+    
+    coin_flip_example: `<svg class="svg-graph" width="500" height="320" viewBox="0 0 500 320" xmlns="http://www.w3.org/2000/svg">
+        <rect x="5" y="5" width="490" height="310" rx="12" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+        <text x="250" y="25" text-anchor="middle" font-size="14" fill="#5b21b6" font-weight="bold">🪙 مثال: رمي العملة 5 مرات - n=5, p=0.5</text>
+        <!-- Coins -->
+        <circle cx="80" cy="80" r="25" fill="#fbbf24" stroke="#f59e0b" stroke-width="2"/>
+        <text x="80" y="85" text-anchor="middle" font-size="14" font-weight="bold">H</text>
+        <circle cx="150" cy="80" r="25" fill="#fbbf24" stroke="#f59e0b" stroke-width="2"/>
+        <text x="150" y="85" text-anchor="middle" font-size="14" font-weight="bold">T</text>
+        <circle cx="220" cy="80" r="25" fill="#fbbf24" stroke="#f59e0b" stroke-width="2"/>
+        <text x="220" y="85" text-anchor="middle" font-size="14" font-weight="bold">H</text>
+        <circle cx="290" cy="80" r="25" fill="#fbbf24" stroke="#f59e0b" stroke-width="2"/>
+        <text x="290" y="85" text-anchor="middle" font-size="14" font-weight="bold">H</text>
+        <circle cx="360" cy="80" r="25" fill="#fbbf24" stroke="#f59e0b" stroke-width="2"/>
+        <text x="360" y="85" text-anchor="middle" font-size="14" font-weight="bold">T</text>
+        <text x="250" y="130" text-anchor="middle" font-size="11" fill="#5b21b6">5 flips: 3 Heads (successes), 2 Tails (failures)</text>
+        <!-- Calculation -->
+        <rect x="20" y="145" width="460" height="80" rx="6" fill="#ddd6fe" stroke="#7c3aed" stroke-width="2"/>
+        <text x="250" y="165" text-anchor="middle" font-size="11" fill="#5b21b6" font-weight="bold">P(X=3) = C(5,3)·(0.5)³·(0.5)²</text>
+        <text x="250" y="185" text-anchor="middle" font-size="11" fill="#5b21b6">= 10 · 0.125 · 0.25</text>
+        <text x="250" y="205" text-anchor="middle" font-size="12" fill="#5b21b6" font-weight="bold">= 0.3125 = 31.25%</text>
+        <!-- Stats -->
+        <rect x="20" y="235" width="220" height="60" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+        <text x="130" y="255" text-anchor="middle" font-size="11" fill="#92400e" font-weight="bold">Mean μ = n·p</text>
+        <text x="130" y="275" text-anchor="middle" font-size="12" fill="#92400e">μ = 5·0.5 = 2.5</text>
+        <rect x="260" y="235" width="220" height="60" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+        <text x="370" y="255" text-anchor="middle" font-size="11" fill="#92400e" font-weight="bold">Std Dev σ = √(npq)</text>
+        <text x="370" y="275" text-anchor="middle" font-size="12" fill="#92400e">σ = √(5·0.5·0.5) ≈ 1.118</text>
+    </svg>`,
+    
+    conditions_checklist: `<svg class="svg-graph" width="500" height="320" viewBox="0 0 500 320" xmlns="http://www.w3.org/2000/svg">
+        <rect x="5" y="5" width="490" height="310" rx="12" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+        <text x="250" y="25" text-anchor="middle" font-size="14" fill="#991b1b" font-weight="bold">✅ شروط التوزيع ذي الحدين - BINS</text>
+        <rect x="20" y="45" width="450" height="55" rx="6" fill="#fecaca" stroke="#dc2626" stroke-width="2"/>
+        <text x="50" y="70" font-size="20" fill="#dc2626" font-weight="bold">B</text>
+        <text x="80" y="70" font-size="11" fill="#991b1b" font-weight="bold">Binary outcomes:</text>
+        <text x="80" y="88" font-size="10" fill="#991b1b">نتيجتان فقط (نجاح/فشل) - Two outcomes only</text>
+        <rect x="20" y="110" width="450" height="55" rx="6" fill="#fecaca" stroke="#dc2626" stroke-width="2"/>
+        <text x="50" y="135" font-size="20" fill="#dc2626" font-weight="bold">I</text>
+        <text x="80" y="135" font-size="11" fill="#991b1b" font-weight="bold">Independent trials:</text>
+        <text x="80" y="153" font-size="10" fill="#991b1b">التجارب مستقلة - كل تجربة لا تؤثر على الأخرى</text>
+        <rect x="20" y="175" width="450" height="55" rx="6" fill="#fecaca" stroke="#dc2626" stroke-width="2"/>
+        <text x="50" y="200" font-size="20" fill="#dc2626" font-weight="bold">N</text>
+        <text x="80" y="200" font-size="11" fill="#991b1b" font-weight="bold">Number of trials fixed:</text>
+        <text x="80" y="218" font-size="10" fill="#991b1b">عدد التجارب n ثابت ومحدد مسبقاً</text>
+        <rect x="20" y="240" width="450" height="55" rx="6" fill="#fecaca" stroke="#dc2626" stroke-width="2"/>
+        <text x="50" y="265" font-size="20" fill="#dc2626" font-weight="bold">S</text>
+        <text x="80" y="265" font-size="11" fill="#991b1b" font-weight="bold">Same probability:</text>
+        <text x="80" y="283" font-size="10" fill="#991b1b">احتمال النجاح p ثابت في كل تجربة</text>
+    </svg>`,
+    
+    combination_visual: `<svg class="svg-graph" width="500" height="300" viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
+        <rect x="5" y="5" width="490" height="290" rx="12" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+        <text x="250" y="25" text-anchor="middle" font-size="14" fill="#92400e" font-weight="bold">🔢 معامل التوافيق C(n,k) - Combinations</text>
+        <rect x="20" y="45" width="450" height="50" rx="6" fill="#fde68a" stroke="#f59e0b" stroke-width="2"/>
+        <text x="245" y="70" text-anchor="middle" font-size="13" fill="#92400e" font-family="'Amiri', serif" font-weight="bold">C(n,k) = n! / [k! · (n-k)!]</text>
+        <text x="245" y="90" text-anchor="middle" font-size="10" fill="#92400e">Number of ways to choose k items from n (order doesn't matter)</text>
+        <!-- Example: C(10,6) -->
+        <rect x="20" y="105" width="220" height="100" rx="6" fill="#fde68a" stroke="#f59e0b" stroke-width="2"/>
+        <text x="130" y="125" text-anchor="middle" font-size="11" fill="#92400e" font-weight="bold">C(10,6) = ?</text>
+        <text x="130" y="145" text-anchor="middle" font-size="10" fill="#92400e">10! / (6! · 4!)</text>
+        <text x="130" y="163" text-anchor="middle" font-size="10" fill="#92400e">= (10·9·8·7)/(4·3·2·1)</text>
+        <text x="130" y="183" text-anchor="middle" font-size="11" fill="#92400e" font-weight="bold">= 5040/24 = 210</text>
+        <!-- Pascal's triangle snippet -->
+        <rect x="260" y="105" width="210" height="100" rx="6" fill="#fde68a" stroke="#f59e0b" stroke-width="2"/>
+        <text x="365" y="125" text-anchor="middle" font-size="11" fill="#92400e" font-weight="bold">Pascal's Triangle:</text>
+        <text x="365" y="143" text-anchor="middle" font-size="10" fill="#92400e">Row 0: 1</text>
+        <text x="365" y="158" text-anchor="middle" font-size="10" fill="#92400e">Row 1: 1 1</text>
+        <text x="365" y="173" text-anchor="middle" font-size="10" fill="#92400e">Row 2: 1 2 1</text>
+        <text x="365" y="188" text-anchor="middle" font-size="10" fill="#92400e">Row 3: 1 3 3 1</text>
+        <text x="365" y="203" text-anchor="middle" font-size="10" fill="#92400e">Row 4: 1 4 6 4 1</text>
+        <!-- Common values -->
+        <rect x="20" y="215" width="450" height="65" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+        <text x="245" y="235" text-anchor="middle" font-size="11" fill="#92400e" font-weight="bold">Common Values:</text>
+        <text x="245" y="252" text-anchor="middle" font-size="10" fill="#92400e">C(5,2)=10 | C(10,3)=120 | C(10,5)=252 | C(20,5)=15,504</text>
+        <text x="245" y="270" text-anchor="middle" font-size="10" fill="#92400e">C(n,0)=1 | C(n,1)=n | C(n,n)=1 | C(n,k)=C(n,n-k)</text>
+    </svg>`,
+    
+    real_life_applications: `<svg class="svg-graph" width="500" height="360" viewBox="0 0 500 360" xmlns="http://www.w3.org/2000/svg">
+        <rect x="5" y="5" width="490" height="350" rx="12" fill="#fce7f3" stroke="#ec4899" stroke-width="2"/>
+        <text x="250" y="25" text-anchor="middle" font-size="14" fill="#9f1239" font-weight="bold">🌍 تطبيقات الحياة الواقعية - Real-Life Applications</text>
+        <!-- Application 1 -->
+        <rect x="20" y="45" width="220" height="80" rx="6" fill="#fbcfe8" stroke="#ec4899" stroke-width="2"/>
+        <text x="130" y="65" text-anchor="middle" font-size="11" fill="#9f1239" font-weight="bold">🏥 Quality Control</text>
+        <text x="130" y="82" text-anchor="middle" font-size="10" fill="#9f1239">فحص الجودة</text>
+        <text x="130" y="100" text-anchor="middle" font-size="9" fill="#9f1239">n products, p = defect rate</text>
+        <text x="130" y="115" text-anchor="middle" font-size="9" fill="#9f1239">P(X=k defects)</text>
+        <!-- Application 2 -->
+        <rect x="260" y="45" width="220" height="80" rx="6" fill="#fbcfe8" stroke="#ec4899" stroke-width="2"/>
+        <text x="370" y="65" text-anchor="middle" font-size="11" fill="#9f1239" font-weight="bold">📞 Sales Calls</text>
+        <text x="370" y="82" text-anchor="middle" font-size="10" fill="#9f1239">مكالمات البيع</text>
+        <text x="370" y="100" text-anchor="middle" font-size="9" fill="#9f1239">n calls, p = success rate</text>
+        <text x="370" y="115" text-anchor="middle" font-size="9" fill="#9f1239">P(X=k sales)</text>
+        <!-- Application 3 -->
+        <rect x="20" y="135" width="220" height="80" rx="6" fill="#fbcfe8" stroke="#ec4899" stroke-width="2"/>
+        <text x="130" y="155" text-anchor="middle" font-size="11" fill="#9f1239" font-weight="bold">🎯 Free Throws</text>
+        <text x="130" y="172" text-anchor="middle" font-size="10" fill="#9f1239">رميات حرة</text>
+        <text x="130" y="190" text-anchor="middle" font-size="9" fill="#9f1239">n shots, p = accuracy</text>
+        <text x="130" y="205" text-anchor="middle" font-size="9" fill="#9f1239">P(X=k made)</text>
+        <!-- Application 4 -->
+        <rect x="260" y="135" width="220" height="80" rx="6" fill="#fbcfe8" stroke="#ec4899" stroke-width="2"/>
+        <text x="370" y="155" text-anchor="middle" font-size="11" fill="#9f1239" font-weight="bold">💊 Medical Tests</text>
+        <text x="370" y="172" text-anchor="middle" font-size="10" fill="#9f1239">اختبارات طبية</text>
+        <text x="370" y="190" text-anchor="middle" font-size="9" fill="#9f1239">n patients, p = cure rate</text>
+        <text x="370" y="205" text-anchor="middle" font-size="9" fill="#9f1239">P(X=k cured)</text>
+        <!-- Application 5 -->
+        <rect x="20" y="225" width="460" height="60" rx="6" fill="#fbcfe8" stroke="#ec4899" stroke-width="2"/>
+        <text x="250" y="245" text-anchor="middle" font-size="11" fill="#9f1239" font-weight="bold">🎲 Multiple Choice Tests</text>
+        <text x="250" y="262" text-anchor="middle" font-size="10" fill="#9f1239">n questions, p = 1/choices, P(X=k correct answers)</text>
+        <text x="250" y="278" text-anchor="middle" font-size="9" fill="#9f1239">اختبارات متعددة الخيارات</text>
+        <!-- Key insight -->
+        <rect x="20" y="295" width="460" height="50" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+        <text x="250" y="315" text-anchor="middle" font-size="11" fill="#92400e" font-weight="bold">🔑 Key: All have fixed n, two outcomes, constant p, independent</text>
+        <text x="250" y="335" text-anchor="middle" font-size="10" fill="#92400e">جميعها: n ثابت، نتيجتان، p ثابت، تجارب مستقلة</text>
+    </svg>`
+};
+
+// ==================== EXAM DATA - 30 QUESTIONS ====================
+const originalExamData = {
+    sections: [
+        {
+            id: 'sec1',
+            title: { ar: '🔹 القسم 1: مفهوم التوزيع ذي الحدين (Q1-Q5)', en: '🔹 Section 1: Binomial Distribution Concept (Q1-Q5)' },
+            questions: [
+                {
+                    q: { ar: '<strong>س1:</strong> ما هي صيغة التوزيع ذي الحدين؟', en: '<strong>Q1:</strong> What is the binomial distribution formula?' },
+                    svg: svgGraphs.binomial_formula,
+                    options: [
+                        { ar: '<span class="math-display">P(X=k) = C(n,k)·pᵏ·(1-p)ⁿ⁻ᵏ</span>', en: '<span class="math-display">P(X=k) = C(n,k)·pᵏ·(1-p)ⁿ⁻ᵏ</span>' },
+                        { ar: '<span class="math-display">P(X=k) = n·p</span>', en: '<span class="math-display">P(X=k) = n·p</span>' },
+                        { ar: '<span class="math-display">P(X=k) = pᵏ</span>', en: '<span class="math-display">P(X=k) = pᵏ</span>' },
+                        { ar: '<span class="math-display">P(X=k) = k/n</span>', en: '<span class="math-display">P(X=k) = k/n</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'P(X=k) = C(n,k)·pᵏ·(1-p)ⁿ⁻ᵏ حيث C(n,k) معامل التوافيق', en: 'P(X=k) = C(n,k)·pᵏ·(1-p)ⁿ⁻ᵏ where C(n,k) is the combination coefficient' }
+                },
+                {
+                    q: { ar: '<strong>س2:</strong> أي من الشروط التالية يجب توفرها لاستخدام التوزيع ذي الحدين؟', en: '<strong>Q2:</strong> Which condition must be met to use binomial distribution?' },
+                    svg: svgGraphs.conditions_checklist,
+                    options: [
+                        { ar: 'جميع ما سبق: n ثابت، نتيجتان، p ثابت، تجارب مستقلة', en: 'All: fixed n, two outcomes, constant p, independent trials' },
+                        { ar: 'فقط n ثابت', en: 'Only fixed n' },
+                        { ar: 'فقط p ثابت', en: 'Only constant p' },
+                        { ar: 'فقط تجارب مستقلة', en: 'Only independent trials' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'شروط BINS: Binary, Independent, Number fixed, Same probability', en: 'BINS conditions: Binary, Independent, Number fixed, Same probability' }
+                },
+                {
+                    q: { ar: '<strong>س3:</strong> ما قيمة C(10,6)؟', en: '<strong>Q3:</strong> What is C(10,6)?' },
+                    svg: svgGraphs.combination_visual,
+                    options: [
+                        { ar: '<span class="math-display">210</span>', en: '<span class="math-display">210</span>' },
+                        { ar: '<span class="math-display">120</span>', en: '<span class="math-display">120</span>' },
+                        { ar: '<span class="math-display">252</span>', en: '<span class="math-display">252</span>' },
+                        { ar: '<span class="math-display">10</span>', en: '<span class="math-display">10</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'C(10,6) = 10!/(6!·4!) = (10·9·8·7)/(4·3·2·1) = 5040/24 = 210', en: 'C(10,6) = 10!/(6!·4!) = 210' }
+                },
+                {
+                    q: { ar: '<strong>س4:</strong> ما هو متوسط التوزيع ذي الحدين؟', en: '<strong>Q4:</strong> What is the mean of binomial distribution?' },
+                    options: [
+                        { ar: '<span class="math-display">μ = n·p</span>', en: '<span class="math-display">μ = n·p</span>' },
+                        { ar: '<span class="math-display">μ = n·p·(1-p)</span>', en: '<span class="math-display">μ = n·p·(1-p)</span>' },
+                        { ar: '<span class="math-display">μ = p</span>', en: '<span class="math-display">μ = p</span>' },
+                        { ar: '<span class="math-display">μ = n</span>', en: '<span class="math-display">μ = n</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'متوسط التوزيع ذي الحدين μ = n·p', en: 'Mean of binomial distribution μ = n·p' }
+                },
+                {
+                    q: { ar: '<strong>س5:</strong> ما هو الانحراف المعياري للتوزيع ذي الحدين؟', en: '<strong>Q5:</strong> What is the standard deviation of binomial distribution?' },
+                    options: [
+                        { ar: '<span class="math-display">σ = √[n·p·(1-p)]</span>', en: '<span class="math-display">σ = √[n·p·(1-p)]</span>' },
+                        { ar: '<span class="math-display">σ = n·p</span>', en: '<span class="math-display">σ = n·p</span>' },
+                        { ar: '<span class="math-display">σ = p·(1-p)</span>', en: '<span class="math-display">σ = p·(1-p)</span>' },
+                        { ar: '<span class="math-display">σ = n</span>', en: '<span class="math-display">σ = n</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'الانحراف المعياري σ = √[n·p·(1-p)]', en: 'Standard deviation σ = √[n·p·(1-p)]' }
+                }
+            ]
+        },
+        {
+            id: 'sec2',
+            title: { ar: '🔹 القسم 2: مثال 3 - خميس البائع (Q6-Q10)', en: '🔹 Section 2: Example 3 - Khamis the Salesman (Q6-Q10)' },
+            questions: [
+                {
+                    q: { ar: '<strong>س6 (مثل مثال 3):</strong> خميس لديه فرصة 40% لإتمام صفقة بيع. يعرض على 10 أشخاص. ما احتمال أن يشتري منه 6 أشخاص بالضبط؟', en: '<strong>Q6 (like Example 3):</strong> Khamis has 40% chance of sale. He approaches 10 people. What is P(X=6)?' },
+                    svg: svgGraphs.example3_solution,
+                    options: [
+                        { ar: '<span class="math-display">11.1%</span>', en: '<span class="math-display">11.1%</span>' },
+                        { ar: '<span class="math-display">8.6%</span>', en: '<span class="math-display">8.6%</span>' },
+                        { ar: '<span class="math-display">24%</span>', en: '<span class="math-display">24%</span>' },
+                        { ar: '<span class="math-display">40%</span>', en: '<span class="math-display">40%</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'P(X=6) = C(10,6)·(0.4)⁶·(0.6)⁴ = 210·0.004096·0.1296 ≈ 0.1115 ≈ 11.1%', en: 'P(X=6) = C(10,6)·(0.4)⁶·(0.6)⁴ = 210·0.004096·0.1296 ≈ 11.1%' }
+                },
+                {
+                    q: { ar: '<strong>س7:</strong> في مثال 3، ما قيمة n (عدد التجارب)؟', en: '<strong>Q7:</strong> In Example 3, what is n (number of trials)?' },
+                    options: [
+                        { ar: '<span class="math-display">10</span>', en: '<span class="math-display">10</span>' },
+                        { ar: '<span class="math-display">6</span>', en: '<span class="math-display">6</span>' },
+                        { ar: '<span class="math-display">40</span>', en: '<span class="math-display">40</span>' },
+                        { ar: '<span class="math-display">0.40</span>', en: '<span class="math-display">0.40</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'n = 10 (عدد الأشخاص الذين عرض عليهم خميس)', en: 'n = 10 (number of people Khamis approached)' }
+                },
+                {
+                    q: { ar: '<strong>س8:</strong> في مثال 3، ما قيمة p (احتمال النجاح)؟', en: '<strong>Q8:</strong> In Example 3, what is p (probability of success)?' },
+                    options: [
+                        { ar: '<span class="math-display">0.40</span> (أو 40%)', en: '<span class="math-display">0.40</span> (or 40%)' },
+                        { ar: '<span class="math-display">0.60</span>', en: '<span class="math-display">0.60</span>' },
+                        { ar: '<span class="math-display">0.10</span>', en: '<span class="math-display">0.10</span>' },
+                        { ar: '<span class="math-display">0.20</span>', en: '<span class="math-display">0.20</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'p = 0.40 (فرصة 40% لإتمام صفقة بيع)', en: 'p = 0.40 (40% chance of completing a sale)' }
+                },
+                {
+                    q: { ar: '<strong>س9:</strong> في مثال 3، ما قيمة k (عدد النجاحات المطلوبة)؟', en: '<strong>Q9:</strong> In Example 3, what is k (number of successes required)?' },
+                    options: [
+                        { ar: '<span class="math-display">6</span>', en: '<span class="math-display">6</span>' },
+                        { ar: '<span class="math-display">10</span>', en: '<span class="math-display">10</span>' },
+                        { ar: '<span class="math-display">4</span>', en: '<span class="math-display">4</span>' },
+                        { ar: '<span class="math-display">40</span>', en: '<span class="math-display">40</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'k = 6 (نريد احتمال أن يشتري 6 أشخاص)', en: 'k = 6 (we want probability that 6 people buy)' }
+                },
+                {
+                    q: { ar: '<strong>س10:</strong> في مثال 3، ما القيمة المتوقعة (المتوسط) لعدد المشترين؟', en: '<strong>Q10:</strong> In Example 3, what is the expected value (mean) of buyers?' },
+                    options: [
+                        { ar: '<span class="math-display">4 أشخاص</span>', en: '<span class="math-display">4 people</span>' },
+                        { ar: '<span class="math-display">6 أشخاص</span>', en: '<span class="math-display">6 people</span>' },
+                        { ar: '<span class="math-display">10 أشخاص</span>', en: '<span class="math-display">10 people</span>' },
+                        { ar: '<span class="math-display">2.4 أشخاص</span>', en: '<span class="math-display">2.4 people</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'μ = n·p = 10·0.40 = 4 أشخاص (المتوقع أن يشتري 4 أشخاص)', en: 'μ = n·p = 10·0.40 = 4 people (expected number of buyers)' }
+                }
+            ]
+        },
+        {
+            id: 'sec3',
+            title: { ar: '🔹 القسم 3: تمرين 3 - التسويق عبر الهاتف (Q11-Q15)', en: '🔹 Section 3: Exercise 3 - Phone Marketing (Q11-Q15)' },
+            questions: [
+                {
+                    q: { ar: '<strong>س11 (تمرين 3):</strong> خولة تجري 20 مكالمة، احتمال البيع 15%. ما احتمال أن تنجح 5 مكالمات بالضبط؟', en: '<strong>Q11 (Exercise 3):</strong> Khawla makes 20 calls, sale probability 15%. What is P(X=5)?' },
+                    svg: svgGraphs.exercise3_solution,
+                    options: [
+                        { ar: '<span class="math-display">10.3%</span>', en: '<span class="math-display">10.3%</span>' },
+                        { ar: '<span class="math-display">6.7%</span>', en: '<span class="math-display">6.7%</span>' },
+                        { ar: '<span class="math-display">8.3%</span>', en: '<span class="math-display">8.3%</span>' },
+                        { ar: '<span class="math-display">11.9%</span>', en: '<span class="math-display">11.9%</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'P(X=5) = C(20,5)·(0.15)⁵·(0.85)¹⁵ = 15504·0.0000759·0.0874 ≈ 0.1029 ≈ 10.3%', en: 'P(X=5) = C(20,5)·(0.15)⁵·(0.85)¹⁵ ≈ 10.3%' }
+                },
+                {
+                    q: { ar: '<strong>س12:</strong> في تمرين 3، ما القيمة المتوقعة لعدد المبيعات الناجحة؟', en: '<strong>Q12:</strong> In Exercise 3, what is the expected number of successful sales?' },
+                    options: [
+                        { ar: '<span class="math-display">3 مكالمات</span>', en: '<span class="math-display">3 calls</span>' },
+                        { ar: '<span class="math-display">5 مكالمات</span>', en: '<span class="math-display">5 calls</span>' },
+                        { ar: '<span class="math-display">15%</span>', en: '<span class="math-display">15%</span>' },
+                        { ar: '<span class="math-display">20 مكالمة</span>', en: '<span class="math-display">20 calls</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'μ = n·p = 20·0.15 = 3 مكالمات ناجحة متوقعة', en: 'μ = n·p = 20·0.15 = 3 expected successful calls' }
+                },
+                {
+                    q: { ar: '<strong>س13:</strong> في تمرين 3، ما الانحراف المعياري؟', en: '<strong>Q13:</strong> In Exercise 3, what is the standard deviation?' },
+                    options: [
+                        { ar: '<span class="math-display">≈ 1.60</span>', en: '<span class="math-display">≈ 1.60</span>' },
+                        { ar: '<span class="math-display">≈ 2.55</span>', en: '<span class="math-display">≈ 2.55</span>' },
+                        { ar: '<span class="math-display">≈ 3.00</span>', en: '<span class="math-display">≈ 3.00</span>' },
+                        { ar: '<span class="math-display">≈ 0.15</span>', en: '<span class="math-display">≈ 0.15</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'σ = √(n·p·(1-p)) = √(20·0.15·0.85) = √2.55 ≈ 1.60', en: 'σ = √(20·0.15·0.85) = √2.55 ≈ 1.60' }
+                },
+                {
+                    q: { ar: '<strong>س14:</strong> في تمرين 3، ما احتمال أن تفشل جميع المكالمات (0 مبيعات)؟', en: '<strong>Q14:</strong> In Exercise 3, what is probability of 0 sales (all fail)?' },
+                    options: [
+                        { ar: '<span class="math-display">(0.85)²⁰ ≈ 0.039</span>', en: '<span class="math-display">(0.85)²⁰ ≈ 0.039</span>' },
+                        { ar: '<span class="math-display">(0.15)²⁰</span>', en: '<span class="math-display">(0.15)²⁰</span>' },
+                        { ar: '<span class="math-display">0.15</span>', en: '<span class="math-display">0.15</span>' },
+                        { ar: '<span class="math-display">0.85</span>', en: '<span class="math-display">0.85</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'P(X=0) = C(20,0)·(0.15)⁰·(0.85)²⁰ = 1·1·(0.85)²⁰ ≈ 0.039 ≈ 3.9%', en: 'P(X=0) = (0.85)²⁰ ≈ 0.039' }
+                },
+                {
+                    q: { ar: '<strong>س15:</strong> في تمرين 3، ما احتمال أن تنجح مكالمة واحدة فقط؟', en: '<strong>Q15:</strong> In Exercise 3, what is probability of exactly 1 success?' },
+                    options: [
+                        { ar: '<span class="math-display">C(20,1)·(0.15)¹·(0.85)¹⁹ ≈ 0.137</span>', en: '<span class="math-display">C(20,1)·(0.15)¹·(0.85)¹⁹ ≈ 0.137</span>' },
+                        { ar: '<span class="math-display">0.15</span>', en: '<span class="math-display">0.15</span>' },
+                        { ar: '<span class="math-display">20 × 0.15 = 3</span>', en: '<span class="math-display">20 × 0.15 = 3</span>' },
+                        { ar: '<span class="math-display">0.85</span>', en: '<span class="math-display">0.85</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'P(X=1) = C(20,1)·(0.15)¹·(0.85)¹⁹ = 20·0.15·(0.85)¹⁹ ≈ 0.137 ≈ 13.7%', en: 'P(X=1) = C(20,1)·(0.15)·(0.85)¹⁹ ≈ 0.137' }
+                }
+            ]
+        },
+        {
+            id: 'sec4',
+            title: { ar: '🔹 القسم 4: حسابات التوافيق والاحتمالات (Q16-Q20)', en: '🔹 Section 4: Combinations & Probabilities (Q16-Q20)' },
+            questions: [
+                {
+                    q: { ar: '<strong>س16:</strong> ما قيمة C(5,2)؟', en: '<strong>Q16:</strong> What is C(5,2)?' },
+                    svg: svgGraphs.combination_visual,
+                    options: [
+                        { ar: '<span class="math-display">10</span>', en: '<span class="math-display">10</span>' },
+                        { ar: '<span class="math-display">20</span>', en: '<span class="math-display">20</span>' },
+                        { ar: '<span class="math-display">5</span>', en: '<span class="math-display">5</span>' },
+                        { ar: '<span class="math-display">25</span>', en: '<span class="math-display">25</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'C(5,2) = 5!/(2!·3!) = (5·4)/(2·1) = 10', en: 'C(5,2) = 5!/(2!·3!) = 10' }
+                },
+                {
+                    q: { ar: '<strong>س17:</strong> ما قيمة C(20,5)؟', en: '<strong>Q17:</strong> What is C(20,5)?' },
+                    options: [
+                        { ar: '<span class="math-display">15,504</span>', en: '<span class="math-display">15,504</span>' },
+                        { ar: '<span class="math-display">20</span>', en: '<span class="math-display">20</span>' },
+                        { ar: '<span class="math-display">100</span>', en: '<span class="math-display">100</span>' },
+                        { ar: '<span class="math-display">120</span>', en: '<span class="math-display">120</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'C(20,5) = 20!/(5!·15!) = 15,504', en: 'C(20,5) = 20!/(5!·15!) = 15,504' }
+                },
+                {
+                    q: { ar: '<strong>س18:</strong> رميت عملة 5 مرات (p=0.5). ما احتمال الحصول على 3 صور بالضبط؟', en: '<strong>Q18:</strong> Coin flipped 5 times (p=0.5). What is P(X=3 heads)?' },
+                    svg: svgGraphs.coin_flip_example,
+                    options: [
+                        { ar: '<span class="math-display">31.25%</span>', en: '<span class="math-display">31.25%</span>' },
+                        { ar: '<span class="math-display">50%</span>', en: '<span class="math-display">50%</span>' },
+                        { ar: '<span class="math-display">60%</span>', en: '<span class="math-display">60%</span>' },
+                        { ar: '<span class="math-display">12.5%</span>', en: '<span class="math-display">12.5%</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'P(X=3) = C(5,3)·(0.5)³·(0.5)² = 10·0.125·0.25 = 0.3125 = 31.25%', en: 'P(X=3) = C(5,3)·(0.5)³·(0.5)² = 10·0.125·0.25 = 31.25%' }
+                },
+                {
+                    q: { ar: '<strong>س19:</strong> في سؤال 18، ما القيمة المتوقعة لعدد الصور؟', en: '<strong>Q19:</strong> In Q18, what is expected number of heads?' },
+                    options: [
+                        { ar: '<span class="math-display">2.5</span>', en: '<span class="math-display">2.5</span>' },
+                        { ar: '<span class="math-display">3</span>', en: '<span class="math-display">3</span>' },
+                        { ar: '<span class="math-display">5</span>', en: '<span class="math-display">5</span>' },
+                        { ar: '<span class="math-display">1.25</span>', en: '<span class="math-display">1.25</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'μ = n·p = 5·0.5 = 2.5', en: 'μ = n·p = 5·0.5 = 2.5' }
+                },
+                {
+                    q: { ar: '<strong>س20:</strong> في سؤال 18، ما الانحراف المعياري؟', en: '<strong>Q20:</strong> In Q18, what is the standard deviation?' },
+                    options: [
+                        { ar: '<span class="math-display">≈ 1.118</span>', en: '<span class="math-display">≈ 1.118</span>' },
+                        { ar: '<span class="math-display">≈ 2.5</span>', en: '<span class="math-display">≈ 2.5</span>' },
+                        { ar: '<span class="math-display">≈ 0.5</span>', en: '<span class="math-display">≈ 0.5</span>' },
+                        { ar: '<span class="math-display">≈ 1.25</span>', en: '<span class="math-display">≈ 1.25</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'σ = √(5·0.5·0.5) = √1.25 ≈ 1.118', en: 'σ = √(5·0.5·0.5) = √1.25 ≈ 1.118' }
+                }
+            ]
+        },
+        {
+            id: 'sec5',
+            title: { ar: '🔹 القسم 5: مسائل تطبيقية (Q21-Q25)', en: '🔹 Section 5: Applied Problems (Q21-Q25)' },
+            questions: [
+                {
+                    q: { ar: '<strong>س21:</strong> لاعب كرة سلة دقة رمياته الحرة 75%. رمى 8 رميات. ما احتمال أن يسجل 6 بالضبط؟', en: '<strong>Q21:</strong> Basketball player 75% free throw accuracy. Shoots 8. P(X=6)?' },
+                    svg: svgGraphs.real_life_applications,
+                    options: [
+                        { ar: '<span class="math-display">≈ 31.1%</span>', en: '<span class="math-display">≈ 31.1%</span>' },
+                        { ar: '<span class="math-display">≈ 75%</span>', en: '<span class="math-display">≈ 75%</span>' },
+                        { ar: '<span class="math-display">≈ 6</span>', en: '<span class="math-display">≈ 6</span>' },
+                        { ar: '<span class="math-display">≈ 50%</span>', en: '<span class="math-display">≈ 50%</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'P(X=6) = C(8,6)·(0.75)⁶·(0.25)² = 28·0.1780·0.0625 ≈ 0.311 ≈ 31.1%', en: 'P(X=6) = C(8,6)·(0.75)⁶·(0.25)² ≈ 31.1%' }
+                },
+                {
+                    q: { ar: '<strong>س22:</strong> في سؤال 21، ما القيمة المتوقعة لعدد الرميات الناجحة؟', en: '<strong>Q22:</strong> In Q21, what is expected number of successful shots?' },
+                    options: [
+                        { ar: '<span class="math-display">6</span>', en: '<span class="math-display">6</span>' },
+                        { ar: '<span class="math-display">8</span>', en: '<span class="math-display">8</span>' },
+                        { ar: '<span class="math-display">4.5</span>', en: '<span class="math-display">4.5</span>' },
+                        { ar: '<span class="math-display">75%</span>', en: '<span class="math-display">75%</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'μ = n·p = 8·0.75 = 6 رميات ناجحة متوقعة', en: 'μ = n·p = 8·0.75 = 6 expected successful shots' }
+                },
+                {
+                    q: { ar: '<strong>س23:</strong> مصنع ينتج منتجات بنسبة عيب 5%. في عينة من 20 منتج، ما احتمال وجود 2 معيبين بالضبط؟', en: '<strong>Q23:</strong> Factory has 5% defect rate. In sample of 20, P(X=2 defects)?' },
+                    options: [
+                        { ar: '<span class="math-display">≈ 18.9%</span>', en: '<span class="math-display">≈ 18.9%</span>' },
+                        { ar: '<span class="math-display">≈ 5%</span>', en: '<span class="math-display">≈ 5%</span>' },
+                        { ar: '<span class="math-display">≈ 20%</span>', en: '<span class="math-display">≈ 20%</span>' },
+                        { ar: '<span class="math-display">≈ 2%</span>', en: '<span class="math-display">≈ 2%</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'P(X=2) = C(20,2)·(0.05)²·(0.95)¹⁸ = 190·0.0025·0.3972 ≈ 0.1887 ≈ 18.9%', en: 'P(X=2) = C(20,2)·(0.05)²·(0.95)¹⁸ ≈ 18.9%' }
+                },
+                {
+                    q: { ar: '<strong>س24:</strong> اختبار 10 أسئلة، كل سؤال 4 خيارات. طالب يخمن عشوائياً. ما احتمال إجابته الصحيحة على 3 أسئلة بالضبط؟', en: '<strong>Q24:</strong> 10-question test, 4 choices each. Student guesses randomly. P(X=3 correct)?' },
+                    options: [
+                        { ar: '<span class="math-display">≈ 25.0%</span>', en: '<span class="math-display">≈ 25.0%</span>' },
+                        { ar: '<span class="math-display">≈ 30%</span>', en: '<span class="math-display">≈ 30%</span>' },
+                        { ar: '<span class="math-display">≈ 75%</span>', en: '<span class="math-display">≈ 75%</span>' },
+                        { ar: '<span class="math-display">≈ 10%</span>', en: '<span class="math-display">≈ 10%</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'p = 1/4 = 0.25. P(X=3) = C(10,3)·(0.25)³·(0.75)⁷ = 120·0.015625·0.1335 ≈ 0.250 ≈ 25.0%', en: 'p = 0.25. P(X=3) = C(10,3)·(0.25)³·(0.75)⁷ ≈ 25.0%' }
+                },
+                {
+                    q: { ar: '<strong>س25:</strong> في سؤال 24، ما القيمة المتوقعة للإجابات الصحيحة؟', en: '<strong>Q25:</strong> In Q24, what is expected number of correct answers?' },
+                    options: [
+                        { ar: '<span class="math-display">2.5</span>', en: '<span class="math-display">2.5</span>' },
+                        { ar: '<span class="math-display">3</span>', en: '<span class="math-display">3</span>' },
+                        { ar: '<span class="math-display">5</span>', en: '<span class="math-display">5</span>' },
+                        { ar: '<span class="math-display">10</span>', en: '<span class="math-display">10</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'μ = n·p = 10·0.25 = 2.5 إجابة صحيحة متوقعة', en: 'μ = n·p = 10·0.25 = 2.5 expected correct answers' }
+                }
+            ]
+        },
+        {
+            id: 'sec6',
+            title: { ar: '🔹 القسم 6: مسائل مركبة وتحليل (Q26-Q30)', en: '🔹 Section 6: Mixed Problems & Analysis (Q26-Q30)' },
+            questions: [
+                {
+                    q: { ar: '<strong>س26:</strong> مريض لديه فرصة 80% للشفاء. عولج 6 مرضى. ما احتمال شفاء 5 بالضبط؟', en: '<strong>Q26:</strong> Patient has 80% recovery chance. 6 patients treated. P(X=5 recover)?' },
+                    svg: svgGraphs.binomial_bar_chart,
+                    options: [
+                        { ar: '<span class="math-display">≈ 39.3%</span>', en: '<span class="math-display">≈ 39.3%</span>' },
+                        { ar: '<span class="math-display">≈ 80%</span>', en: '<span class="math-display">≈ 80%</span>' },
+                        { ar: '<span class="math-display">≈ 50%</span>', en: '<span class="math-display">≈ 50%</span>' },
+                        { ar: '<span class="math-display">≈ 20%</span>', en: '<span class="math-display">≈ 20%</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'P(X=5) = C(6,5)·(0.8)⁵·(0.2)¹ = 6·0.32768·0.2 ≈ 0.393 ≈ 39.3%', en: 'P(X=5) = C(6,5)·(0.8)⁵·(0.2)¹ ≈ 39.3%' }
+                },
+                {
+                    q: { ar: '<strong>س27:</strong> في سؤال 26، ما احتمال شفاء جميع المرضى الـ 6؟', en: '<strong>Q27:</strong> In Q26, what is probability all 6 patients recover?' },
+                    options: [
+                        { ar: '<span class="math-display">(0.8)⁶ ≈ 26.2%</span>', en: '<span class="math-display">(0.8)⁶ ≈ 26.2%</span>' },
+                        { ar: '<span class="math-display">0.8</span>', en: '<span class="math-display">0.8</span>' },
+                        { ar: '<span class="math-display">6·0.8 = 4.8</span>', en: '<span class="math-display">6·0.8 = 4.8</span>' },
+                        { ar: '<span class="math-display">100%</span>', en: '<span class="math-display">100%</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'P(X=6) = C(6,6)·(0.8)⁶·(0.2)⁰ = 1·(0.8)⁶·1 ≈ 0.262 ≈ 26.2%', en: 'P(X=6) = (0.8)⁶ ≈ 26.2%' }
+                },
+                {
+                    q: { ar: '<strong>س28:</strong> في سؤال 26، ما احتمال عدم شفاء أي مريض؟', en: '<strong>Q28:</strong> In Q26, what is probability no patient recovers?' },
+                    options: [
+                        { ar: '<span class="math-display">(0.2)⁶ ≈ 0.0064%</span>', en: '<span class="math-display">(0.2)⁶ ≈ 0.0064%</span>' },
+                        { ar: '<span class="math-display">0.2</span>', en: '<span class="math-display">0.2</span>' },
+                        { ar: '<span class="math-display">0</span>', en: '<span class="math-display">0</span>' },
+                        { ar: '<span class="math-display">0.8</span>', en: '<span class="math-display">0.8</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'P(X=0) = C(6,0)·(0.8)⁰·(0.2)⁶ = 1·1·(0.2)⁶ ≈ 0.000064 ≈ 0.0064%', en: 'P(X=0) = (0.2)⁶ ≈ 0.0064%' }
+                },
+                {
+                    q: { ar: '<strong>س29:</strong> أي من السيناريوهات التالية يمثل توزيعاً ذي حدين؟', en: '<strong>Q29:</strong> Which scenario represents a binomial distribution?' },
+                    options: [
+                        { ar: 'رمي عملة 10 مرات وعدّ عدد الصور', en: 'Flipping coin 10 times and counting heads' },
+                        { ar: 'سحب كرات من كيس بدون إرجاع', en: 'Drawing balls from bag without replacement' },
+                        { ar: 'قياس أطوال 100 شخص', en: 'Measuring heights of 100 people' },
+                        { ar: 'رمي نرد حتى ظهور 6', en: 'Rolling die until 6 appears' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'رمي العملة 10 مرات: n=10 ثابت، نتيجتان (صورة/كتابة)، p=0.5 ثابت، تجارب مستقلة', en: 'Coin 10 times: n=10 fixed, two outcomes, p=0.5 constant, independent trials' }
+                },
+                {
+                    q: { ar: '<strong>س30:</strong> في التوزيع ذي الحدين، إذا زاد n مع ثبات p، ماذا يحدث للتوزيع؟', en: '<strong>Q30:</strong> In binomial distribution, if n increases with constant p, what happens?' },
+                    options: [
+                        { ar: 'يقترب من التوزيع الطبيعي (Normal)', en: 'Approaches Normal distribution' },
+                        { ar: 'يبقى كما هو', en: 'Stays the same' },
+                        { ar: 'يصبح التوزيع منتظماً', en: 'Becomes uniform' },
+                        { ar: 'يختفي التوزيع', en: 'Distribution disappears' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'عندما n كبير، التوزيع ذي الحدين يقترب من التوزيع الطبيعي (نظرية الحد المركزي)', en: 'When n is large, binomial distribution approaches normal distribution (Central Limit Theorem)' }
+                }
+            ]
+        }
+    ]
+};
+
+function shuffleArray(array) {
+    const arr = [...array];
+    for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(rng() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+}
+
+function prepareShuffledExam() {
+    rng = mulberry32(currentSeed);
+    examData = JSON.parse(JSON.stringify(originalExamData));
+    correctAnswersMap = {};
+    let globalIdx = 0;
+    examData.sections.forEach((section) => {
+        section.questions = shuffleArray(section.questions);
+        section.questions.forEach((q) => {
+            const optionsWithCorrect = q.options.map((opt, idx) => ({ option: opt, isCorrect: idx === q.correct }));
+            const shuffledOptions = shuffleArray(optionsWithCorrect);
+            q.options = shuffledOptions.map(o => o.option);
+            q.correct = shuffledOptions.findIndex(o => o.isCorrect);
+            correctAnswersMap[globalIdx] = String.fromCharCode(97 + q.correct);
+            globalIdx++;
+        });
+    });
+}
+
+function reshuffleExam() {
+    const msg = currentLang === 'ar' ? '🔄 سيتم إنشاء أسئلة جديدة ومسح إجاباتك. هل أنت متأكد؟' : '🔄 New questions will be generated. Are you sure?';
+    if (confirm(msg)) {
+        currentSeed = Date.now(); timeRemaining = TOTAL_TIME; answersVisible = false;
+        prepareShuffledExam(); renderExam(); saveState();
+        alert(currentLang === 'ar' ? '🎲 تم تغيير الأسئلة! حظاً موفقاً! 🍀' : '🎲 Questions changed! Good luck! 🍀');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+}
+
+function setLanguage(lang) {
+    currentLang = lang;
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    document.getElementById('btn-ar').classList.toggle('active', lang === 'ar');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    document.body.classList.toggle('en-mode', lang === 'en');
+    
+    document.querySelectorAll('[data-ar]').forEach(el => {
+        el.textContent = el.getAttribute('data-' + lang);
+    });
+    
+    document.querySelectorAll('[data-placeholder-ar]').forEach(el => {
+        el.placeholder = el.getAttribute('data-placeholder-' + lang);
+    });
+    
+    renderExam(); saveState(false);
+}
+
+function renderExam() {
+    const container = document.getElementById('exam-content');
+    const labels = { ar: { option: ['أ', 'ب', 'ج', 'د'], answer: '✅ الإجابة:' }, en: { option: ['A', 'B', 'C', 'D'], answer: '✅ Answer:' } };
+    const lbl = labels[currentLang];
+    let html = '';
+    let globalIdx = 0;
+    
+    examData.sections.forEach((section, secIdx) => {
+        const badgeClass = ['module-1', 'module-2', 'module-3', 'module-4', 'module-5', 'module-6'][secIdx];
+        html += '<section class="bg-white p-6 rounded-2xl shadow-lg border-2 border-amber-100">';
+        html += '<div class="text-center mb-4"><span class="module-badge ' + badgeClass + '">' + section.title[currentLang] + '</span></div>';
+        html += '<div class="space-y-4">';
+        
+        section.questions.forEach((q) => {
+            html += '<div class="question-card" id="q-' + globalIdx + '">';
+            html += '<strong class="text-amber-700 text-lg">' + (currentLang === 'ar' ? 'السؤال ' : 'Question ') + (globalIdx + 1) + '</strong><br>';
+            html += '<div class="mt-2">' + q.q[currentLang] + '</div>';
+            if (q.svg) html += '<div class="graph-container">' + q.svg + '</div>';
+            
+            html += '<div class="mt-4 space-y-2">';
+            q.options.forEach((opt, oIdx) => {
+                html += '<label class="cursor-pointer block hover:bg-amber-50 rounded-lg p-3 transition border border-gray-200">';
+                html += '<input type="radio" name="q' + globalIdx + '" value="' + String.fromCharCode(97 + oIdx) + '" class="mr-2 ml-2">';
+                html += '<span class="arabic-math">' + lbl.option[oIdx] + ') ' + opt[currentLang] + '</span>';
+                html += '</label>';
+            });
+            html += '</div>';
+            
+            html += '<div class="flex gap-2 mt-3">';
+            html += '<button onclick="checkAnswer(' + globalIdx + ')" class="check-btn">' + (currentLang === 'ar' ? '✓ تحقق' : '✓ Check') + '</button>';
+            html += '<button onclick="toggleSolution(' + globalIdx + ')" class="show-answer-btn">' + (currentLang === 'ar' ? '📖 أظهر الحل' : '📖 Show Solution') + '</button>';
+            html += '</div>';
+            
+            html += '<div id="solution-' + globalIdx + '" class="solution-box">';
+            html += '<strong class="text-green-700">' + lbl.answer + ' ' + lbl.option[q.correct] + ')</strong> ';
+            html += '<span class="arabic-math text-green-700">' + q.options[q.correct][currentLang] + '</span><br>';
+            html += '<span class="text-sm text-green-700 mt-2 block arabic-math">' + q.answer[currentLang] + '</span>';
+            html += '</div>';
+            html += '</div>';
+            globalIdx++;
+        });
+        
+        html += '</div></section>';
+    });
+    
+    container.innerHTML = html;
+}
+
+function startTimer() {
+    updateTimerDisplay();
+    timerInterval = setInterval(() => {
+        timeRemaining--;
+        updateTimerDisplay();
+        if (timeRemaining % 60 === 0) saveState(false);
+        if (timeRemaining <= 600) document.getElementById('timer').classList.add('timer-warning');
+        if (timeRemaining <= 0) {
+            clearInterval(timerInterval);
+            alert(currentLang === 'ar' ? "⏰ انتهى الوقت!" : "⏰ Time's up!");
+            gradeExam();
+        }
+    }, 1000);
+}
+
+function updateTimerDisplay() {
+    const m = Math.floor(timeRemaining / 60);
+    const s = timeRemaining % 60;
+    document.getElementById('timer').textContent = m.toString().padStart(2,'0') + ':' + s.toString().padStart(2,'0');
+}
+
+function toggleAnswers() {
+    answersVisible = !answersVisible;
+    document.querySelectorAll('.solution-box').forEach(el => {
+        if (answersVisible) {
+            el.classList.add('show');
+        } else {
+            el.classList.remove('show');
+        }
+    });
+    saveState(false);
+}
+
+function checkAnswer(qId) {
+    const sel = document.querySelector('input[name="q'+qId+'"]:checked');
+    
+    if (!sel) {
+        alert(currentLang === 'ar' ? '⚠️ الرجاء اختيار إجابة أولاً' : '⚠️ Please select an answer first');
+        return;
+    }
+    
+    const isCorrect = sel.value === correctAnswersMap[qId];
+    const card = document.getElementById('q-' + qId);
+    card.classList.remove('correct', 'incorrect');
+    card.classList.add(isCorrect ? 'correct' : 'incorrect');
+    
+    const solution = document.getElementById('solution-' + qId);
+    solution.classList.add('show');
+    
+    if (isCorrect) {
+        alert(currentLang === 'ar' ? '✅ إجابة صحيحة! أحسنت!' : '✅ Correct answer! Well done!');
+    } else {
+        alert(currentLang === 'ar' ? '❌ إجابة غير صحيحة. راجع الحل.' : '❌ Incorrect answer. Check the solution.');
+    }
+}
+
+function toggleSolution(qId) {
+    const solution = document.getElementById('solution-' + qId);
+    solution.classList.toggle('show');
+}
+
+function gradeExam() {
+    let correctCount = 0;
+    const sectionScores = new Array(TOTAL_SECTIONS).fill(0);
+    
+    for (let i = 0; i < TOTAL_QUESTIONS; i++) {
+        const sel = document.querySelector('input[name="q'+i+'"]:checked');
+        const card = document.getElementById('q-' + i);
+        if (card) {
+            const isCorrect = sel && sel.value === correctAnswersMap[i];
+            if (isCorrect) {
+                correctCount++;
+                card.classList.add('correct');
+                card.classList.remove('incorrect');
+                sectionScores[Math.floor(i / QUESTIONS_PER_SECTION)]++;
+            } else {
+                card.classList.add('incorrect');
+                card.classList.remove('correct');
+            }
+        }
+    }
+    
+    const score = Math.round((correctCount / TOTAL_QUESTIONS) * 100);
+    document.getElementById('res-total').textContent = score + ' / 100';
+    document.getElementById('res-name').textContent = document.getElementById('studentName').value || (currentLang === 'ar' ? 'بطل' : 'Champion');
+    document.getElementById('res-date').textContent = new Date().toLocaleDateString(currentLang === 'ar' ? 'ar-AE' : 'en-US');
+    
+    const pc = document.getElementById('sections-performance');
+    pc.innerHTML = '';
+    examData.sections.forEach((s, idx) => {
+        pc.innerHTML += '<div class="flex justify-between items-center p-3 bg-white rounded-lg"><span class="text-gray-700">' + s.title[currentLang] + '</span><span class="font-bold text-amber-700">' + sectionScores[idx] + '/' + QUESTIONS_PER_SECTION + '</span></div>';
+    });
+    
+    const badge = document.getElementById('success-badge');
+    document.getElementById('success-percent').textContent = score + '%';
+    
+    if (currentLang === 'ar') {
+        if (score >= 90) { badge.textContent = '🌟 ممتاز جداً!'; badge.className = 'success-badge grade-excellent'; }
+        else if (score >= 75) { badge.textContent = '👏 ممتاز!'; badge.className = 'success-badge grade-good'; }
+        else if (score >= 50) { badge.textContent = '👍 جيد'; badge.className = 'success-badge grade-pass'; }
+        else { badge.textContent = '💪 حاول مرة أخرى'; badge.className = 'success-badge grade-fail'; }
+    } else {
+        if (score >= 90) { badge.textContent = '🌟 Outstanding!'; badge.className = 'success-badge grade-excellent'; }
+        else if (score >= 75) { badge.textContent = '👏 Excellent!'; badge.className = 'success-badge grade-good'; }
+        else if (score >= 50) { badge.textContent = '👍 Good'; badge.className = 'success-badge grade-pass'; }
+        else { badge.textContent = '💪 Try Again'; badge.className = 'success-badge grade-fail'; }
+    }
+    
+    document.getElementById('results-panel').classList.remove('hidden');
+    document.getElementById('results-panel').scrollIntoView({ behavior: 'smooth' });
+    if (timerInterval) clearInterval(timerInterval);
+}
+
+function sendResultsToEmail() {
+    const btn = document.getElementById('sendEmailBtn');
+    const status = document.getElementById('emailStatus');
+    btn.disabled = true;
+    btn.textContent = currentLang === 'ar' ? '⏳ جاري الإرسال...' : '⏳ Sending...';
+    
+    const name = document.getElementById('studentName').value || 'N/A';
+    const studentClass = document.getElementById('studentClass').value || 'N/A';
+    const date = document.getElementById('examDate').value || new Date().toLocaleDateString();
+    const score = document.getElementById('res-total').textContent;
+    const successRate = document.getElementById('success-percent').textContent;
+    const badge = document.getElementById('success-badge').textContent;
+    
+    let questionsHTML = '<div style="font-family:Arial; direction:rtl;">';
+    questionsHTML += '<h2>🎲 ' + (currentLang === 'ar' ? 'نتيجة امتحان التوزيعات ذات الحدين' : 'Binomial Distributions Exam Result') + '</h2>';
+    questionsHTML += '<p><strong>' + (currentLang === 'ar' ? 'الاسم' : 'Name') + ':</strong> ' + name + '</p>';
+    questionsHTML += '<p><strong>' + (currentLang === 'ar' ? 'الشعبة' : 'Class') + ':</strong> ' + studentClass + '</p>';
+    questionsHTML += '<p><strong>' + (currentLang === 'ar' ? 'التاريخ' : 'Date') + ':</strong> ' + date + '</p>';
+    questionsHTML += '<p><strong>' + (currentLang === 'ar' ? 'الدرجة' : 'Score') + ':</strong> ' + score + ' (' + successRate + '%)</p>';
+    questionsHTML += '<p><strong>' + (currentLang === 'ar' ? 'التقدير' : 'Grade') + ':</strong> ' + badge + '</p>';
+    questionsHTML += '<hr><h3>' + (currentLang === 'ar' ? 'تفاصيل الإجابات:' : 'Answer Details:') + '</h3><table style="width:100%; border-collapse:collapse;">';
+    questionsHTML += '<tr style="background:#d97706; color:white;"><th style="padding:8px; border:1px solid #ddd;">#</th><th style="padding:8px; border:1px solid #ddd;">' + (currentLang === 'ar' ? 'السؤال' : 'Question') + '</th><th style="padding:8px; border:1px solid #ddd;">' + (currentLang === 'ar' ? 'إجابة الطالب' : 'Student Answer') + '</th><th style="padding:8px; border:1px solid #ddd;">' + (currentLang === 'ar' ? 'الصحيحة' : 'Correct') + '</th><th style="padding:8px; border:1px solid #ddd;">' + (currentLang === 'ar' ? 'النتيجة' : 'Result') + '</th></tr>';
+    
+    let globalIdx = 0;
+    examData.sections.forEach((section) => {
+        questionsHTML += '<tr style="background:#fef3c7;"><td colspan="5" style="padding:8px; font-weight:bold; border:1px solid #ddd;">' + section.title.ar + '</td></tr>';
+        section.questions.forEach((q) => {
+            const sel = document.querySelector('input[name="q'+globalIdx+'"]:checked');
+            const sv = sel ? sel.value : null;
+            const cv = correctAnswersMap[globalIdx];
+            const ic = sv === cv;
+            let sat = currentLang === 'ar' ? '❌ لم يجب' : '❌ No answer';
+            let sac = '#dc2626';
+            if (sv) {
+                const si = sv.charCodeAt(0) - 97;
+                sat = q.options[si][currentLang];
+                sac = ic ? '#16a34a' : '#dc2626';
+            }
+            const cat = q.options[q.correct][currentLang];
+            const rb = ic ? '#f0fdf4' : '#fef2f2';
+            questionsHTML += '<tr style="background:' + rb + ';"><td style="padding:8px; border:1px solid #ddd; text-align:center;">' + (globalIdx+1) + '</td><td style="padding:8px; border:1px solid #ddd;">' + q.q.ar.replace(/<[^>]+>/g, '').substring(0, 80) + '...</td><td style="padding:8px; border:1px solid #ddd; color:' + sac + ';">' + sat + '</td><td style="padding:8px; border:1px solid #ddd; color:#16a34a;">' + cat + '</td><td style="padding:8px; border:1px solid #ddd; text-align:center;">' + (ic?'✅':'❌') + '</td></tr>';
+            globalIdx++;
+        });
+    });
+    questionsHTML += '</table></div>';
+    
+    const templateParams = {
+        to_email: TARGET_EMAIL,
+        student_name: name,
+        student_class: studentClass,
+        exam_date: date,
+        total_score: score,
+        success_rate: successRate,
+        grade: badge,
+        answers_table: questionsHTML
+    };
+    
+    emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams)
+        .then(() => {
+            status.textContent = currentLang === 'ar' ? '✅ تم الإرسال بنجاح!' : '✅ Sent successfully!';
+            status.style.color = '#16a34a';
+            btn.textContent = currentLang === 'ar' ? '✓ تم' : '✓ Sent';
+            alert(currentLang === 'ar' ? 'تم إرسال النتيجة للمعلم بنجاح!' : 'Result sent to teacher successfully!');
+        })
+        .catch((error) => {
+            status.textContent = currentLang === 'ar' ? '❌ فشل الإرسال' : '❌ Failed to send';
+            status.style.color = '#dc2626';
+            btn.disabled = false;
+            btn.textContent = currentLang === 'ar' ? '📧 حاول مرة أخرى' : '📧 Try Again';
+            alert(currentLang === 'ar' ? 'فشل الإرسال: ' + error.text : 'Failed: ' + error.text);
+        });
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+    const saved = loadState();
+    if (saved && saved.seed) {
+        currentSeed = saved.seed;
+        currentLang = saved.lang || 'ar';
+        timeRemaining = saved.timeRemaining !== undefined ? saved.timeRemaining : TOTAL_TIME;
+        answersVisible = saved.answersVisible || false;
+    } else {
+        currentSeed = Date.now();
+    }
+    
+    document.getElementById('btn-ar').classList.toggle('active', currentLang === 'ar');
+    document.getElementById('btn-en').classList.toggle('active', currentLang === 'en');
+    document.body.classList.toggle('en-mode', currentLang === 'en');
+    document.documentElement.lang = currentLang;
+    document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+    
+    document.querySelectorAll('[data-ar]').forEach(el => {
+        el.textContent = el.getAttribute('data-' + currentLang);
+    });
+    
+    document.querySelectorAll('[data-placeholder-ar]').forEach(el => {
+        el.placeholder = el.getAttribute('data-placeholder-' + currentLang);
+    });
+    
+    prepareShuffledExam();
+    renderExam();
+    if (saved) {
+        if (saved.studentName) document.getElementById('studentName').value = saved.studentName;
+        if (saved.studentClass) document.getElementById('studentClass').value = saved.studentClass;
+        if (saved.examDate) document.getElementById('examDate').value = saved.examDate;
+        if (saved.answers) restoreAnswers(saved.answers);
+    }
+    setupAnswerListeners();
+    setupInputListeners();
+    startTimer();
+});
+window.addEventListener('beforeunload', () => saveState(false));
+</script>
+</body>
+</html>
